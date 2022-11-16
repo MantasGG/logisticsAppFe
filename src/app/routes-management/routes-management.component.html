@@ -1,0 +1,159 @@
+
+<div style="text-align: center; padding-top: 50px; padding-bottom: 50px;">
+  <h1 class="justify-content-center"><i class="fa-solid fa-route fa-1xl"></i> Routes management</h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+<!--      First column -->
+      <table class="table align-middle mb-0 bg-white table-hover">
+        <thead class="bg-light">
+        <tr>
+          <th>Id</th>
+          <th>Driver</th>
+          <th>Point A</th>
+          <th>Point B</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Checkpoints</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--  start -->
+        <tr *ngFor="let route of routesList$ | async">
+          <td>
+            <div class="d-flex align-items-center">
+              <div class="ms-3">
+                <p class="fw-bold mb-1">{{route.id}}</p>
+              </div>
+            </div>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{route.assignedUserId}}</p>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{route.pointA}}</p>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{route.pointB}}</p>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{route.startDate.toString().substring(0,10)}} {{route.startDate.toString().substring(14,19)}}</p>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{route.endDate.toString().substring(0,10)}} {{route.endDate.toString().substring(14,19)}}</p>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">
+              <a href="javascript:;" mdbTooltip="2022-10-08 10:00">Vievis</a>
+            </p>
+            <p class="fw-normal mb-1">
+              <a href="javascript:;" mdbTooltip="2022-10-08 10:00">Kaunas</a>
+            </p>
+          </td>
+          <td>
+            <p class="badge badge-success rounded-pill d-inline">Completed</p>
+          </td>
+          <td>
+            <div style="margin-bottom: 10px;">
+              <button type="button" class="btn btn-outline-info btn-sm btn-rounded">
+                Edit
+              </button>
+            </div>
+            <div>
+              <button type="button" class="btn btn-danger btn-sm btn-rounded" (click)="deleteRoute(this.route.id)">
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+        <!--  end -->
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <div class="col-md">
+
+      <div style="text-align: center">
+        <h2>Create new route</h2>
+      </div>
+
+      <form
+        [formGroup]="routeForm"
+        (submit)="onSubmit()"
+      >
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text width-span"> <i class="fa-solid fa-location-dot"></i> </span>
+          </div>
+          <input formControlName="pointA" name="" class="form-control" placeholder="Point A" type="email">
+        </div> <!-- form-group// -->
+        <div
+          *ngIf="
+                (routeForm.get('pointA')?.dirty ||
+                routeForm.get('pointA')?.touched) &&
+                routeForm.get('pointA')?.errors?.['required']
+              "
+          class="alert alert-danger">
+          Point A is required.
+        </div>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text width-span"> <i class="fa-solid fa-location-dot"></i> </span>
+          </div>
+          <input formControlName="pointB" class="form-control" placeholder="Point B" type="text">
+        </div> <!-- form-group// -->
+        <div
+          *ngIf="
+                (routeForm.get('pointB')?.dirty ||
+                routeForm.get('pointB')?.touched) &&
+                routeForm.get('pointB')?.errors?.['required']
+              "
+          class="alert alert-danger">
+          Point B is required.
+        </div>
+        Start date
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text width-span"> <i class="fa-regular fa-calendar"></i> </span>
+          </div>
+          <input formControlName="startDate" class="form-control" placeholder="Start Date" type="datetime-local">
+        </div> <!-- form-group// -->
+        <div
+          *ngIf="
+                (routeForm.get('startDate')?.dirty ||
+                routeForm.get('startDate')?.touched) &&
+                routeForm.get('startDate')?.errors?.['required']
+              "
+          class="alert alert-danger">
+          Start date is required.
+        </div>
+        End date
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text width-span"> <i class="fa-regular fa-calendar"></i> </span>
+          </div>
+          <input formControlName="endDate" class="form-control" placeholder="End Date" type="datetime-local">
+        </div> <!-- form-group// -->
+        <div
+          *ngIf="
+                (routeForm.get('endDate')?.dirty ||
+                routeForm.get('endDate')?.touched) &&
+                routeForm.get('endDate')?.errors?.['required']
+              "
+          class="alert alert-danger">
+          End date is required.
+        </div>
+        <div class="form-group">
+          <button type="submit"
+                  class="btn btn-primary btn-block"
+                  [disabled]="routeForm.invalid"> Create </button>
+        </div> <!-- form-group// -->
+      </form>
+    </div>
+  </div>
+</div>

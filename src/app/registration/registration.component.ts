@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
+import {UsersService} from "../services/users.service";
 
 @Component({
   selector: 'app-registration',
@@ -20,10 +21,10 @@ export class RegistrationComponent implements OnInit {
     address: new FormControl('')
   });
 
+
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
-    private http: HttpClient
+    private usersService: UsersService,
   ) { }
 
   ngOnInit(): void {
@@ -40,10 +41,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit(){
-    this.http.post(
-      'http://localhost:8080/api/v1/registration',
-      this.regForm.value
-    )
-      .subscribe()
+    this.usersService.createUser(this.regForm);
   }
 }

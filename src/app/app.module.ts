@@ -26,13 +26,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from "@angular/forms";
 
 import {HttpClientModule} from "@angular/common/http";
+import { UsersListComponent } from './users-list/users-list.component';
+import { RoutesManagementComponent } from './routes-management/routes-management.component';
+import { ForumComponent } from './forum/forum.component';
+import { CheckpointsComponent } from './checkpoints/checkpoints.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    UsersListComponent,
+    RoutesManagementComponent,
+    ForumComponent,
+    CheckpointsComponent
   ],
   imports: [
     BrowserModule,
