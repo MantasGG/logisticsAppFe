@@ -30,6 +30,9 @@ import { UsersListComponent } from './users-list/users-list.component';
 import { RoutesManagementComponent } from './routes-management/routes-management.component';
 import { ForumComponent } from './forum/forum.component';
 import { CheckpointsComponent } from './checkpoints/checkpoints.component';
+import { RoutesComponent } from './routes/routes.component';
+import { MedicininepazymaComponent } from './medicininepazyma/medicininepazyma.component';
+import { VadovopazymaComponent } from './vadovopazyma/vadovopazyma.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { CheckpointsComponent } from './checkpoints/checkpoints.component';
     UsersListComponent,
     RoutesManagementComponent,
     ForumComponent,
-    CheckpointsComponent
+    CheckpointsComponent,
+    RoutesComponent,
+    MedicininepazymaComponent,
+    VadovopazymaComponent
   ],
   imports: [
     BrowserModule,

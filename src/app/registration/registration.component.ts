@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {UsersService} from "../services/users.service";
 
 @Component({
@@ -21,26 +21,40 @@ export class RegistrationComponent implements OnInit {
     address: new FormControl('')
   });
 
-
+  error: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
-    private usersService: UsersService,
+    private router: Router,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
     this.regForm = this.formBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required]],
       gender: ['Gender', [Validators.required]],
       role: ['Select job type', [Validators.required]],
       password: ['', [Validators.required]],
-      address: ['', [Validators.required]]
+      address: ['']
     })
   }
 
-  onSubmit(){
-    this.usersService.createUser(this.regForm);
+  onSubmit() {
+    this.http
+      .post(
+        'http://localhost:8080/api/v1/registration',
+        this.regForm.value
+      )
+      .subscribe(() => {
+          this.error = false;
+          this.router.navigate(['/login'], {
+            queryParams: {registered: 'success'},
+          });
+        },
+        (error: HttpErrorResponse) => {
+          this.error = true;
+        });
   }
 }

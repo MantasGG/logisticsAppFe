@@ -6,4 +6,5 @@ export interface Route{
   pointB: string;
   startDate: Date;
   endDate: Date;
+  status: string;
 }

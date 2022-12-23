@@ -18,7 +18,7 @@ console.warn(this.checkpointsUrl.href);
     return this.httpClient.get<Checkpoint[]>(this.checkpointsUrl.href);
   }
 
-  loadCheckpointsByForumId(routeId: bigint) {
+  loadCheckpointsByRouteId(routeId: bigint) {
     console.warn(this.checkpointsUrl.href + routeId);
     return this.httpClient.get<Checkpoint[]>(this.checkpointsUrl.href + routeId);
   }
@@ -27,7 +27,7 @@ console.warn(this.checkpointsUrl.href);
     this.httpClient.post(this.checkpointsUrl.href, checkpointForm.value).subscribe();
   }
 
-  updateRoute(id: bigint, updateForm: FormGroup){
+  updateCheckpoint(id: bigint, updateForm: FormGroup){
     this.httpClient.put<any>(this.checkpointsUrl.href + id, updateForm.value).subscribe();
   }
 

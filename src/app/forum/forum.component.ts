@@ -4,9 +4,9 @@ import {Forum} from "../shared/Forum";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ForumService} from "../services/forum.service";
 import {CommentService} from "../services/comment.service";
-import {ForumComment} from "../shared/ForumComment";
 import {User} from "../shared/user";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AuthService} from "../login/auth.service";
 
 @Component({
   selector: 'app-forum',
@@ -25,7 +25,8 @@ export class ForumComponent implements OnInit {
     // @ts-ignore
     id: null,
     title: '',
-    body: ''
+    body: '',
+    createdBy: ''
   }
 
 
@@ -33,28 +34,37 @@ export class ForumComponent implements OnInit {
     // @ts-ignore
     id: null,
     comment: '',
-    forumId: null
+    forumId: null,
+    createdBy: ''
   }
 
   forumForm: FormGroup = new FormGroup({
     title: new FormControl(''),
-    body: new FormControl('')
+    body: new FormControl(''),
+    createdBy: new FormControl('')
   });
 
   commentForm: FormGroup = new FormGroup({
-    comment: new FormControl('')
+    comment: new FormControl(''),
+    createdBy: new FormControl('')
   });
 
-  constructor(private modalService: NgbModal, private forumService: ForumService, private commentService: CommentService, private formBuilder: FormBuilder) { }
+  constructor(private modalService: NgbModal,
+              private forumService: ForumService,
+              private commentService: CommentService,
+              private formBuilder: FormBuilder,
+              public authService: AuthService) { }
 
   ngOnInit(): void {
     this.forumForm = this.formBuilder.group({
       title: ['', [Validators.required]],
-      body: ['', [Validators.required]]
+      body: ['', [Validators.required]],
+      createdBy: ['']
     })
     this.commentForm = this.formBuilder.group({
       comment: ['', [Validators.required]],
-      forumId: [null]
+      forumId: [null],
+      createdBy: ['']
     })
     this.loadForumWithComments();
   }
@@ -97,12 +107,14 @@ export class ForumComponent implements OnInit {
   }
 
   onSubmit() {
+    this.forumForm.patchValue({createdBy: this.authService.getFirstAndLastName()});
     this.forumService.createForum(this.forumForm);
     window.location.reload();
   }
 
   createComment(forumId: bigint){
     this.commentForm.patchValue({forumId: forumId});
+    this.commentForm.patchValue({createdBy: this.authService.getFirstAndLastName()});
     this.commentService.createComment(forumId, this.commentForm);
     window.location.reload();
   }

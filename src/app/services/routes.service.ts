@@ -20,6 +20,13 @@ export class RoutesService{
     return this.httpClient.get<Route[]>(this.routesUrl.href);
   }
 
+  loadRoutesByAssignedUserId(): Observable<Route[]>{
+    return this.httpClient.get<Route[]>(this.routesUrl.href + localStorage.getItem('id'));
+  }
+  loadRoutesByAssignedUserIdIsEmpty(): Observable<Route[]>{
+    return this.httpClient.get<Route[]>(this.routesUrl.href + "notassigned");
+  }
+
   deleteRoute(id: bigint){
     this.httpClient.delete(this.routesUrl.href + id).subscribe();
   }
@@ -30,5 +37,13 @@ export class RoutesService{
 
   createRoute(routeForm: FormGroup){
     this.httpClient.post(this.routesUrl.href, routeForm.value).subscribe();
+  }
+
+  assignRoute(id: bigint, userId: string) {
+    this.httpClient.get(this.routesUrl.href + "assign/" + id + "/" + userId).subscribe();
+  }
+
+  unassignRoute(id: bigint) {
+    this.httpClient.get(this.routesUrl.href + "unassign/" + id).subscribe();
   }
 }

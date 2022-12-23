@@ -33,7 +33,8 @@
     "rxjs": "~7.5.0",
     "save": "^2.9.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "@auth0/angular-jwt": "^5.0.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.3.0",

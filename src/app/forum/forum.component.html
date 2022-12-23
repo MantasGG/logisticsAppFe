@@ -18,9 +18,11 @@
                     <div>
                       <div class="d-flex justify-content-between align-items-center">
                         <p class="mb-1">
+                          {{forum.createdBy}}
+                          <br>
                           {{forum.title}}
                         </p>
-                        <a href="javascript:;" style="color: #DC3545" (click)="deleteForum(forum.id)">
+                        <a href="javascript:;" style="color: #DC3545" (click)="deleteForum(forum.id)" [hidden]="!authService.isSuperUser()">
                           <i class="fa-regular fa-trash-can fa-xs"></i>
                           <span class="small"> delete</span>
                         </a>
@@ -41,9 +43,9 @@
                         <div>
                           <div class="d-flex justify-content-between align-items-center">
                             <p class="mb-1">
-                              Comment
+                              {{forum.comment[i].createdBy}}
                             </p>
-                            <a href="javascript:;" style="color: #DC3545" (click)="deleteComment(forum.comment[i].id)">
+                            <a href="javascript:;" style="color: #DC3545" (click)="deleteComment(forum.comment[i].id)" [hidden]="!authService.isSuperUser()">
                               <i class="fa-regular fa-trash-can fa-xs"></i>
                               <span class="small"> delete</span>
                             </a>

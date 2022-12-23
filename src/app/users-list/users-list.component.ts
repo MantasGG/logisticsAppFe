@@ -6,6 +6,7 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
+import {AuthService} from "../login/auth.service";
 
 @Component({
   selector: 'app-users-list',
@@ -42,6 +43,7 @@ export class UsersListComponent implements OnInit {
   constructor(private modalService: NgbModal,
               private usersService: UsersService,
               private formBuilder: FormBuilder,
+              public authService: AuthService
   ) {}
 
   ngOnInit(): void {

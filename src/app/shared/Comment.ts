@@ -3,5 +3,6 @@ export interface Comment{
   forumId: number;
   replyId: number;
   comment: string;
+  createdBy: string;
 
 }
