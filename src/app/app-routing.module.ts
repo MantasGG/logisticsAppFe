@@ -8,11 +8,18 @@ import {ForumComponent} from "./forum/forum.component";
 import {CheckpointsComponent} from "./checkpoints/checkpoints.component";
 import {AuthGuard} from "./login/auth.guard";
 import {RoutesComponent} from "./routes/routes.component";
+import {DiagramComponent} from "./diagram/diagram.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
   {path: 'registration', component: RegistrationComponent},
+  {path: 'ataskaita', component: DiagramComponent,
+    canActivate:[AuthGuard],
+    data: {
+      role: 'Manager',
+      superUser: 'Admin'
+    }},
   {path: 'users', component: UsersListComponent,
     canActivate:[AuthGuard],
     data: {

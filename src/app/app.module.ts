@@ -33,6 +33,7 @@ import { CheckpointsComponent } from './checkpoints/checkpoints.component';
 import { RoutesComponent } from './routes/routes.component';
 import { MedicininepazymaComponent } from './medicininepazyma/medicininepazyma.component';
 import { VadovopazymaComponent } from './vadovopazyma/vadovopazyma.component';
+import { DiagramComponent } from './diagram/diagram.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { VadovopazymaComponent } from './vadovopazyma/vadovopazyma.component';
     CheckpointsComponent,
     RoutesComponent,
     MedicininepazymaComponent,
-    VadovopazymaComponent
+    VadovopazymaComponent,
+    DiagramComponent
   ],
   imports: [
     BrowserModule,
